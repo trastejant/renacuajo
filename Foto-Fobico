@@ -1,0 +1,63 @@
+#include <Servo.h>
+
+Servo servoL;
+Servo servoR;
+
+int LDRdcha,LDRizq;
+
+
+
+void setup(){
+  
+  servoR.attach(7);
+  servoL.attach(4);
+  
+  servoL.write(90);
+  servoR.write(90);
+  delay(1000);
+  
+
+}
+
+void loop(){
+  LDRdcha = analogRead(A0);
+  LDRizq = analogRead(A1);
+  
+  if(LDRdcha < LDRizq){derecha();}else if(LDRdcha > LDRizq){izquierda();}else if(LDRdcha==LDRizq){avanza();}else{retrocede();}
+  delay(10);
+}
+
+void Stop(){
+  servoL.write(90);
+  delay(10);
+  servoR.write(90);
+  delay(10);
+}
+
+void avanza(){
+  servoL.write(0);
+  delay(10);
+  servoR.write(180);
+  delay(10);
+}
+
+void retrocede(){
+  servoL.write(180);
+  delay(10);
+  servoR.write(0);
+  delay(10);
+}
+
+void derecha(){
+  servoL.write(0);
+  delay(10);
+  servoR.write(90);
+  delay(10);
+}
+
+void izquierda(){
+  servoL.write(90);
+  delay(10);
+  servoR.write(180);
+  delay(10);
+}
